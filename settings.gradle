@@ -1,0 +1,5 @@
+rootProject.name = 'Hotel Wishlist'
+
+include 'client'
+include 'server'
+include 'commons'
