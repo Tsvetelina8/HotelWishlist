@@ -1,11 +1,9 @@
 package commons;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,8 +11,6 @@ public class HotelFacility {
 
     @Id
     private String name;
-    @ManyToMany(mappedBy = "facilities")
-    private List<Hotel> hotels;
 
     /**
      * Default constructor, for object mapper
@@ -27,14 +23,8 @@ public class HotelFacility {
      */
     public HotelFacility(String name) {
         this.name = name;
-        hotels = new ArrayList<>();
     }
 
-    public void addHotel(Hotel hotel) {
-        if(!hotels.contains(hotel)) {
-            hotels.add(hotel);
-        }
-    }
 
     /**
      * Getter for the name of the facility
@@ -52,9 +42,6 @@ public class HotelFacility {
         this.name = name;
     }
 
-    public List<Hotel> getHotels() {
-        return hotels;
-    }
 
     /**
      * Method to test whether two objects are equal

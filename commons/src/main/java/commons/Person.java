@@ -3,16 +3,17 @@ package commons;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
 @Entity
 public class Person {
     @Id
     private String username;
-    @OneToMany(mappedBy = "owner",  fetch = FetchType.EAGER)
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "owner",  fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<WishList> wishLists;
 
     /**

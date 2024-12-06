@@ -10,7 +10,7 @@ public class WishListController {
     private final WebClient webClient;
 
     public WishListController(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/wishlist/").build(); // Backend base URL
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/").build();
     }
 
     /**
@@ -19,7 +19,7 @@ public class WishListController {
      */
     public void getAllWishLists(String username) {
         webClient.get()
-                .uri("/person/{username}/all", username)
+                .uri("/person/{username}/wishlist", username)
                 .retrieve()
                 .bodyToMono(List.class)
                 .doOnTerminate(() -> System.out.println("Request Completed"))
@@ -50,8 +50,10 @@ public class WishListController {
      */
     public void createWishList(String username, String wishListName) {
         webClient.post()
-                .uri("/person/{username}", username)
-                .bodyValue(new WishList(wishListName)) // Assuming WishList is a class that holds wish list details
+                .uri(uriBuilder -> uriBuilder.path("/person/{username}/wishlist")
+                        .queryParam("wishListName", wishListName)
+                        .build(username))
+                .bodyValue(new WishList(wishListName))
                 .retrieve()
                 .bodyToMono(WishList.class)
                 .doOnTerminate(() -> System.out.println("Request Completed"))
@@ -132,7 +134,7 @@ public class WishListController {
      */
     public void getWishListBySharingCode(String sharingCode) {
         webClient.get()
-                .uri("/shared/{sharingCode}", sharingCode)
+                .uri("/wishlist/shared/{sharingCode}", sharingCode)
                 .retrieve()
                 .bodyToMono(WishList.class)
                 .doOnTerminate(() -> System.out.println("Request Completed"))

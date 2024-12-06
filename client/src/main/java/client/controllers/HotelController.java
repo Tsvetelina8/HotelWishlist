@@ -6,7 +6,7 @@ import commons.Hotel;
 public class HotelController {
 
     private final WebClient webClient;
-    private final String apiUrl = "http://localhost:8080/api/hotel";  // Change this to your backend API URL
+    private final String apiUrl = "http://localhost:8080/api/hotel";
 
     public HotelController(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.baseUrl(apiUrl).build();

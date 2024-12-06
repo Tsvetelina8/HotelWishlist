@@ -1,5 +1,6 @@
 package commons;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.*;
@@ -7,10 +8,12 @@ import java.util.*;
 @Entity
 public class WishList {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "owner_username")
     private Person owner;
     @ManyToMany
@@ -178,8 +181,7 @@ public class WishList {
     @Override
     public String toString() {
         return "WishList{" +
-                "owner=" + owner +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", hotels=" + hotels +
                 '}';
     }

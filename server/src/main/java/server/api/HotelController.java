@@ -11,11 +11,13 @@ import server.database.HotelRepository;
 public class HotelController {
 
     HotelRepository hotelRepository;
-    HotelFacilityRepository hotelFacilityRepository;
 
-    public HotelController(HotelRepository hotelRepository, HotelFacilityRepository hotelFacilityRepository) {
+    /**
+     * Constructor for HotelController
+     * @param hotelRepository the hotel repository
+     */
+    public HotelController(HotelRepository hotelRepository) {
         this.hotelRepository = hotelRepository;
-        this.hotelFacilityRepository = hotelFacilityRepository;
     }
 
     /**
